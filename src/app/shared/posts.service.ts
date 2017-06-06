@@ -16,6 +16,12 @@ export class PostsService {
       .catch(this.handleError);
   }
 
+  addPost(post: Post): Observable<Post> {
+    return this.http.post(this.apiUrl + '/posts', JSON.stringify(post))
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     return res.json() || { };
   }
