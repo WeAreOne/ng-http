@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from './shared/posts.service';
 import { Post } from './shared/post.model';
+import { GithubService } from "./shared/github.service";
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,10 @@ export class AppComponent implements OnInit {
   posts: Array<Post>;
   errorMessage: string;
   createdPost: Post;
+  repos: Array<any>;
 
-  constructor(private postsService: PostsService) { }
+  constructor(private postsService: PostsService,
+              private githubService: GithubService) { }
 
   ngOnInit() {
     this.postsService.getPosts()
@@ -28,4 +31,9 @@ export class AppComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
+  getRepos(orgName: string) {
+    this.githubService.listRepos(orgName)
+      .subscribe(repos => this.repos = repos,
+        error => this.errorMessage = <any>error);
+  }
 }

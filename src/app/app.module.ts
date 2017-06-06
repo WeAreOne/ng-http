@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { PostsService } from './shared/posts.service';
+import { GithubService } from './shared/github.service';
 
 @NgModule({
   declarations: [
@@ -13,9 +14,10 @@ import { PostsService } from './shared/posts.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    JsonpModule
   ],
-  providers: [ PostsService ],
+  providers: [ PostsService, GithubService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
